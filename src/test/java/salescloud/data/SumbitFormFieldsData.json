@@ -1,0 +1,28 @@
+[
+	{"ProductName" : "Ambrane 20000mAh Power Bank with 20W",
+	"FirstName" : "TestFirstName",
+	"LastName" : "TestLastName",
+	"Company" : "TestCompany",
+	"Phone" : "1234567890",
+	"CompanyEmail" :"test@company.com",
+	"PersonalEmail" : "test@personal.com",
+	"Region":"Europe",
+	"AnnualRevenue" : "12302",
+	"NumberOfEmployees": "28",
+	"Website" : "www.test.com"},
+	{
+		"ProductName" : "enovo IdeaCentre AIO Intel Core i5 13420H 27\" FHD IPS 3-Side Edgeless",
+			"FirstName" : "TestFirstName1",
+			"LastName" : "TestLastName1",
+			"Company" : "TestCompany1",
+			"Phone" : "1234657890",
+			"CompanyEmail" :"test1@company.com",
+			"PersonalEmail" : "test1@personal.com",
+			"Region":"Middle East/Africa",
+			"AnnualRevenue" : "62302",
+			"NumberOfEmployees": "78",
+			"Website" : "www.test1.com"
+}
+	
+	
+]

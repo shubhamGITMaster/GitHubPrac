@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2024-08-02T00:28:36 IST" name="Default suite" finished-at="2024-08-02T00:28:47 IST" duration-ms="10413">
+    <groups>
+    </groups>
+    <test started-at="2024-08-02T00:28:36 IST" name="Default test" finished-at="2024-08-02T00:28:47 IST" duration-ms="10413">
+      <class name="salescloud.tests.SubmitFormValidation">
+        <test-method is-config="true" signature="launchApplication()[pri:0, instance:salescloud.tests.SubmitFormValidation@17f9d882]" started-at="2024-08-02T00:28:36 IST" name="launchApplication" finished-at="2024-08-02T00:28:41 IST" duration-ms="4886" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- launchApplication -->
+        <test-method signature="testProducts_SubmitformForAnyProduct(java.util.HashMap)[pri:0, instance:salescloud.tests.SubmitFormValidation@17f9d882]" started-at="2024-08-02T00:28:41 IST" name="testProducts_SubmitformForAnyProduct" data-provider="getDataForSubmitFormFields" finished-at="2024-08-02T00:28:47 IST" duration-ms="5351" status="PASS">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[{Company=TestCompany, ProductName=Ambrane 20000mAh Power Bank with 20W, FirstName=TestFirstName, Phone=1234567890, CompanyEmail=test@company.com, Region=Europe, Website=www.test.com, LastName=TestLastName, NumberOfEmployees=28, PersonalEmail=test@personal.com, AnnualRevenue=12302}]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testProducts_SubmitformForAnyProduct -->
+      </class> <!-- salescloud.tests.SubmitFormValidation -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
