@@ -15,7 +15,8 @@ import salescloud.resources.ExtentReporterNG;
 
 public class Listeners extends BaseTest implements ITestListener {
 	ExtentTest test;
-	ExtentReports extent = ExtentReporterNG.getReportObject();
+	ExtentReporterNG extentReporterNG= new ExtentReporterNG();
+	ExtentReports extent = extentReporterNG.getReportObject();
 	ThreadLocal<ExtentTest> extentTest= new ThreadLocal<ExtentTest>();
 	
 	@Override

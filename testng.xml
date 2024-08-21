@@ -1,13 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="Suite">
-<listeners>
-<listener class-name="salescloud.testcomponents.Listeners"></listener>
-</listeners>
-	<test thread-count="1" name="Test">
+	<listeners>
+		<listener class-name="salescloud.testcomponents.Listeners"></listener>
+	</listeners>
+	<test thread-count="5" name="Exp">
 		<classes>
 			<class name="salescloud.tests.HomePageValidation" />
-			<class name="salescloud.tests.SubmitFormValidation"></class>
+			<class name="salescloud.tests.SubmitFormValidation" />
+		</classes>
+	</test>
+	<test thread-count="5" name="SalesCloudLead">
+		<classes>
+			<class name="salescloud.tests.LoginPageValidationInternal" />
+			<class name="salescloud.tests.LeadPageValidationInternal" />
+		</classes>
+	</test>
+	<test thread-count="5" name="SalesCloudOpportunity">
+
+		<classes>
+			<class name="salescloud.tests.QuoteCreationFromOpportunityInternal" />
 		</classes>
 	</test> <!--
 	Test -->

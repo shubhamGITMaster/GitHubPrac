@@ -1,12 +1,8 @@
 package salescloud.pageobjects;
 
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -49,7 +45,7 @@ public class HomePage extends AbstactComponents {
 		categoryLabels.stream().filter(category -> !category.getText().equalsIgnoreCase(categoryName))
 				.forEach(category -> {
 					try {
-						Thread.sleep(Duration.ofSeconds(2));
+						wait5Seconds();
 					} catch (InterruptedException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -61,7 +57,7 @@ public class HomePage extends AbstactComponents {
 	public List<String> getAllProducts() throws InterruptedException {
 
 		while (true) {
-			Thread.sleep(Duration.ofSeconds(5));
+			wait5Seconds();
 			List<String> returnedProducts = productsNameOnUI.stream().map(WebElement::getText)
 					.collect(Collectors.toList());
 			allproducts.addAll(returnedProducts);
@@ -78,19 +74,22 @@ public class HomePage extends AbstactComponents {
 
 	public SubmitForm clickOnAnyProduct(String productName) {
 		List<WebElement> filtredProduct;
+		waitForWebElementsToApper(productsNameOnUI);
 		do {
 			filtredProduct = productsNameOnUI.stream().filter(prod -> prod.getText().equalsIgnoreCase(productName))
 					.collect(Collectors.toList());
 			scrollToBottom();
 			if (filtredProduct.size() < 1) {
 				waitForElementToClickable(nextButtonXpath);
+				implicitWait();
 				nextButtonXpath.click();
 				implicitWait();
 			}
 		} while (filtredProduct.size() < 1);
 		implicitWait();
 		waitForElementsToClickable(filtredProduct);
-		filtredProduct.getFirst().click();
+		implicitWait();
+		filtredProduct.get(0).click();
 		SubmitForm submitForm = new SubmitForm(driver);
 		return submitForm;
 

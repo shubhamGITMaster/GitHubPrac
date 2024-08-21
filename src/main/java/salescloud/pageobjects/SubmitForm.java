@@ -31,8 +31,8 @@ public class SubmitForm extends AbstactComponents {
 	private WebElement phone;
 	@FindBy(xpath = "//div//label[text()='Company Email']//parent::label//following-sibling::div//input")
 	private WebElement companyEmail;
-	@FindBy(xpath = "//div//label[text()='Personal Email']//parent::label//following-sibling::div//input")
-	private WebElement personalEmail;
+	@FindBy(xpath = "//div//label[text()='Contact Email']//parent::label//following-sibling::div//input")
+	private WebElement contactEmail;
 	@FindBy(xpath = "//lightning-base-combobox[@exportparts='dropdown, option']")
 	private WebElement regionDropDownButton;
 	@FindBy(xpath = "//div//label[text()='Annual Revenue In USD']//parent::label//following-sibling::div//input")
@@ -59,12 +59,10 @@ public class SubmitForm extends AbstactComponents {
 	private WebElement phoneError;
 	@FindBy(xpath = "//label[text()='Company Email']//ancestor::lightning-primitive-input-simple//div[text()='Complete this field.']")
 	private WebElement companyEmailError;
-	@FindBy(xpath = "//label[text()='Personal Email']//ancestor::lightning-primitive-input-simple//div[text()='Complete this field.']")
-	private WebElement personalEmailError;
+	@FindBy(xpath = "//label[text()='Contact Email']//ancestor::lightning-primitive-input-simple//div[text()='Complete this field.']")
+	private WebElement contactEmailError;
 	@FindBy(xpath = "//label[text()='Region']//ancestor::lightning-combobox//div[text()='Complete this field.']")
 	private WebElement regionError;
-	@FindBy(xpath = "//label[text()='Annual Revenue In USD']//ancestor::lightning-primitive-input-simple//div[text()='Complete this field.']")
-	private WebElement annualRevenueError;
 	@FindBy(xpath = "//label[text()='Number Of Employees']//ancestor::lightning-primitive-input-simple//div[text()='Complete this field.']")
 	private WebElement numberOfEmployeesError;
 	@FindBy(xpath = "//label[text()='Website']//ancestor::lightning-primitive-input-simple//div[text()='Complete this field.']")
@@ -72,6 +70,9 @@ public class SubmitForm extends AbstactComponents {
 	
 
 	public String getProductNameOnSubmitForm() {
+		implicitWait();
+		waitForWebElementToApper(productNameOnSubmitForm);
+		implicitWait();
 		return productNameOnSubmitForm.getText();
 	}
 
@@ -86,8 +87,8 @@ public class SubmitForm extends AbstactComponents {
 		phone.sendKeys(input.get("Phone"));
 		waitForWebElementToApper(companyEmail);
 		companyEmail.sendKeys(input.get("CompanyEmail"));
-		waitForWebElementToApper(personalEmail);
-		personalEmail.sendKeys(input.get("PersonalEmail"));
+		waitForWebElementToApper(contactEmail);
+		contactEmail.sendKeys(input.get("ContactEmail"));
 		waitForWebElementToApper(regionDropDownButton);
 		regionDropDownButton.click();
 		waitForWebElementsToApper(regions);
@@ -102,18 +103,23 @@ public class SubmitForm extends AbstactComponents {
 	}
 
 	public void clickOnTheSubmitFormButton()  {
+		implicitWait();
 		waitForWebElementToApper(formSubmitButton);
 		waitForElementToClickable(formSubmitButton);
+		implicitWait();
 	     formSubmitButton.click();
 
 	}
 
 	public String getToastmessage() {
+		implicitWait();
 		waitForWebElementToApper(SuccessToastmessage);
+		implicitWait();
 		return SuccessToastmessage.getText();
 	}
 
 	public void clickOnTheCancelButton() {
+		implicitWait();
 		waitForWebElementToApper(cancelButton);
 		waitForElementToClickable(cancelButton);
 		cancelButton.click();
@@ -146,18 +152,13 @@ public class SubmitForm extends AbstactComponents {
 	}
 
 	public String getErrorMessagePE() {
-		waitForWebElementToApper(personalEmailError);
-		return personalEmailError.getText();
+		waitForWebElementToApper(contactEmailError);
+		return contactEmailError.getText();
 	}
 
 	public String getErrorMessageR() {
 		waitForWebElementToApper(regionError);
 		return regionError.getText();
-	}
-
-	public String getErrorMessageAR() {
-		waitForWebElementToApper(annualRevenueError);
-		return annualRevenueError.getText();
 	}
 
 	public String getErrorMessageNE() {

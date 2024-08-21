@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
@@ -17,15 +18,15 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import salescloud.data.RandomDataGenerator;
-import salescloud.pageobjects.HomePage;
+import salescloud.pageobjects.LoginPageInternal;
 
-public class BaseTest {
-	
+public class BaseTestInternal {
+
 	public WebDriver driver;
-	public HomePage homePage;
+	public LoginPageInternal loginPageInternal;
 
 	public WebDriver initializeDriver() throws IOException {
 		Properties prop = new Properties();
@@ -46,19 +47,18 @@ public class BaseTest {
 		return driver;
 	}
 
-	@BeforeMethod(alwaysRun=true)
-	public HomePage launchApplication() throws IOException {
+	@BeforeMethod
+	public LoginPageInternal launchApplication() throws IOException {
 		driver = initializeDriver();
-		homePage = new HomePage(driver);
-		homePage.goTo();
-		return homePage;
+		loginPageInternal = new LoginPageInternal(driver);
+		loginPageInternal.goTo();
+		return loginPageInternal;
 	}
 
-	@AfterMethod(alwaysRun=true)
+	 @AfterMethod(alwaysRun = true)
 	public void tearDown() {
 		driver.quit();
 	}
-	
 
 	public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
 		TakesScreenshot ts = (TakesScreenshot) driver;
@@ -78,19 +78,67 @@ public class BaseTest {
 		return data;
 
 	}
-	
+
 	public List<HashMap<String, String>> getJsonDataKeyValue(String filePath) throws IOException {
 		// read json to String
 		String jsonContent = FileUtils.readFileToString(new File(filePath), StandardCharsets.UTF_8);
 		ObjectMapper mapper = new ObjectMapper();
-		List<HashMap<String, String>> data = mapper.readValue(jsonContent, new TypeReference<List<HashMap<String, String>>>() {
-		});
+		List<HashMap<String, String>> data = mapper.readValue(jsonContent,
+				new TypeReference<List<HashMap<String, String>>>() {
+				});
 		return data;
 
 	}
-	public File getRandomDataGeneratorForSubmiForm() {
-	return	RandomDataGenerator.generateRandomData();
-		
+
+	public JsonNode getIndustryCategoryComboFromJson() throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(new File(
+				System.getProperty("user.dir") + "\\src\\test\\java\\salescloud\\data\\IndustryCategoryCombo.json"));
+		return rootNode;
+
 	}
 
+	public JsonNode getLeadStatusAndSourceFromJson() throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(new File(
+				System.getProperty("user.dir") + "\\src\\test\\java\\salescloud\\data\\LeadSource_Status.json"));
+		return rootNode;
+
+	}
+
+	public List<String> convertJsonNodeToList(JsonNode nodes) {
+		List<String> list = new ArrayList<String>();
+		if (nodes.isArray()) {
+			for (JsonNode node : nodes) {
+				list.add(node.asText());
+			}
+		}
+		return list;
+	}
+
+	public JsonNode getLeadAgeCategoryDataFromJson() throws IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode rootNode = mapper.readTree(new File(
+				System.getProperty("user.dir") + "\\src\\test\\java\\salescloud\\data\\LeadAgeAndCategoryData.json"));
+		return rootNode;
+
+	}
+
+	public String getExpectedCategoryForAge(JsonNode ageCategories, int ageDays) {
+		for (JsonNode category : ageCategories) {
+			JsonNode rangeNode = category.get("range");
+			if (rangeNode == null || !rangeNode.isArray())
+				continue;
+
+			int minAge = rangeNode.get(0).asInt();
+			int maxAge = rangeNode.get(1).asInt();
+			String message = category.get("message").asText();
+
+			if (ageDays >= minAge && ageDays <= maxAge) {
+				return message;
+			}
+		}
+		return "Unknown";
+
+	}
 }

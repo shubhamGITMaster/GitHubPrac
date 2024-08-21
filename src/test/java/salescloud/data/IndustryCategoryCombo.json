@@ -1,0 +1,34 @@
+{
+    "Electronics": [
+		"--None--",
+        "CCTV Camera",
+        "Digital Camera",
+        "Laptop",
+        "Tablet",
+        "Television"
+    ],
+    "Telecommunications": [
+		"--None--",
+		"Fax Machine",
+        "Home Security Camera",
+        "Modem",
+        "Router",
+        "Smart Phones"
+    ],
+    "Utilities": [
+		"--None--",
+        "Bluetooth Speaker",
+        "Fitness Tracker",
+        "Headphones/Earbuds",
+        "Power Banks",
+        "Smart Watch"
+    ],
+    "Other": [
+		"--None--",
+        "Mouse",
+        "Keyboard",
+        "Charger",
+        "Data Cable",
+        "Laptop Bag"
+    ]
+}

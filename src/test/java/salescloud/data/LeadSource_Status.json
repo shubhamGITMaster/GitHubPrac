@@ -1,0 +1,20 @@
+{
+    "Lead_Status": [
+        "--None--",
+        "Open - Not Contacted",
+        "Working - Contacted",
+        "Closed - Converted",
+        "Closed - Not Converted"
+    ],
+    "Lead_Source": [
+        "--None--",
+        "Web",
+        "Email",
+        "Referral",
+        "Phone Inquiry",
+        "Customer Service Portal",
+        "Social Media",
+        "Trade Show",
+        "Other"
+    ]
+}

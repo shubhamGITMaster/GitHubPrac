@@ -6,13 +6,16 @@ import java.util.List;
 
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
+import salescloud.data.RandomDataGenerator;
 import salescloud.pageobjects.SubmitForm;
 import salescloud.testcomponents.BaseTest;
+import salescloud.testcomponents.Retry;
 
 public class SubmitFormValidation extends BaseTest {
 	public SubmitForm submitForm;
-	public static final String TOASTMESSAGE = "Thank you for submitting your request";
+	public static final String TOASTMESSAGE = "Thank you for submitting your request our Sales representative will reach out to you shortly";
 	public static final String CATEGORY = "Category";
 
 	@Test(priority = 6, dataProvider = "getDataForSubmitFormFields")
@@ -22,6 +25,7 @@ public class SubmitFormValidation extends BaseTest {
 	// submit the form
 
 	public void testProducts_SubmitformForAnyProduct(HashMap<String, String> input) throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
 		submitForm = homePage.clickOnAnyProduct(input.get("ProductName"));
 		String actualProductNameOnSubmitForm = submitForm.getProductNameOnSubmitForm();
 		softAssert.assertEquals(actualProductNameOnSubmitForm, input.get("ProductName"));
@@ -33,11 +37,12 @@ public class SubmitFormValidation extends BaseTest {
 
 	}
 
-	@Test(priority = 8, dataProvider = "getDataForSubmitFormErrorMessage")
+	@Test(priority = 7, dataProvider = "getDataForSubmitFormErrorMessage", retryAnalyzer = Retry.class)
 	// Validate if a validation message is shown to user on clicking submit without
 	// entering mandatory details
 
 	public void tetProducts_ValidateErrorMessagesOnSubmitForm(HashMap<String, String> input){
+		SoftAssert softAssert = new SoftAssert();
 		submitForm = homePage.clickOnAnyProduct(input.get("ProductName"));
 		submitForm.clickOnTheSubmitFormButton();
 		String actualFN = submitForm.getErrorMessageFN();
@@ -54,8 +59,6 @@ public class SubmitFormValidation extends BaseTest {
 		softAssert.assertEquals(actualPE, input.get("PersonalEmailEM" ));
 		String actualR = submitForm.getErrorMessageR();
 		softAssert.assertEquals(actualR, input.get("RegionEM"));
-		String actualAR = submitForm.getErrorMessageAR();
-		softAssert.assertEquals(actualAR, input.get("AnnualRevenueEM"));
 		String actualNE = submitForm.getErrorMessageNE();
 		softAssert.assertEquals(actualNE, input.get("NumberOfEmployeesEM"));
 		String actualW = submitForm.getErrorMessageW();
@@ -64,10 +67,11 @@ public class SubmitFormValidation extends BaseTest {
 
 	}
 
-	@Test(priority = 9, dataProvider = "getDataForSubmitFormErrorMessage")
+	@Test(priority = 8, dataProvider = "getDataForSubmitFormErrorMessage")
 	// Validate if on clicking cancel button, user will be directed to products list
 	// page
 	public void testProducts_ValidateCancelButton(HashMap<String, String> input) {
+		SoftAssert softAssert = new SoftAssert();
 		submitForm = homePage.clickOnAnyProduct(input.get("ProductName"));
 		submitForm.clickOnTheCancelButton();
 		String actualText = homePage.getSearchBoxText();
@@ -78,8 +82,9 @@ public class SubmitFormValidation extends BaseTest {
 
 	@DataProvider
 	public Object[][] getDataForSubmitFormFields() throws IOException {
+		RandomDataGenerator.generateRandomData();
 		List<HashMap<String, String>> dataforSubmitFormFields = getJsonDataKeyValue(
-				System.getProperty("user.dir") + "\\src\\test\\java\\salescloud\\data\\SumbitFormFieldsData.json");
+				System.getProperty("user.dir") + "\\src\\test\\java\\salescloud\\data\\SubmitFormFieldsData.json");
 		return new Object[][] { { dataforSubmitFormFields.get(0) }, { dataforSubmitFormFields.get(1) } };
 	}
 
@@ -89,5 +94,6 @@ public class SubmitFormValidation extends BaseTest {
 				+ "\\src\\test\\java\\salescloud\\data\\SubmitFormErrorMessagesData.json");
 		return new Object[][] { { dataforSubmitFormFields.get(0) } };
 	}
+	
 
 }

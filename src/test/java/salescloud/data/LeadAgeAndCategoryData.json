@@ -1,0 +1,16 @@
+{
+  "age_categories": [
+    {
+      "range": [0, 7],
+      "message": "New"
+    },
+    {
+      "range": [8, 30],
+      "message": "Aging"
+    },
+	{
+	      "range": [31, 10000],
+	      "message": "Stale"
+	    }
+  ]
+}

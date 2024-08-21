@@ -20,6 +20,7 @@ public class HomePageValidation extends BaseTest {
 
 	@Test(priority = 1)
 	public void testHomePageTitle() {
+		SoftAssert softAssert = new SoftAssert();
 		String expected = homePage.getPageTitle();
 		softAssert.assertEquals(expected, homepageTitle);
 		softAssert.assertAll();
@@ -27,6 +28,7 @@ public class HomePageValidation extends BaseTest {
 
 	@Test(priority = 2, dataProvider = "getTelecommunicationsProductData")
 	public void testProducts_telecommunication(List<String> telinput) throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
 		homePage.implicitWait();
 		homePage.selectCategoryToBeChecked(TELECOMMUNICATION);
 		List<String> productsFromUI = homePage.getAllProducts();
@@ -37,6 +39,7 @@ public class HomePageValidation extends BaseTest {
 
 	@Test(priority = 3, dataProvider = "getUtilitiesProductData")
 	public void testProducts_Utilties(List<String> input) throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
 		homePage.implicitWait();
 		homePage.selectCategoryToBeChecked(UTILITIES);
 		List<String> productsFromUI = homePage.getAllProducts();
@@ -48,6 +51,7 @@ public class HomePageValidation extends BaseTest {
 
 	@Test(priority = 4, dataProvider = "getOtherProductData")
 	public void TestProducts_Other(List<String> input) throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
 		homePage.implicitWait();
 		homePage.selectCategoryToBeChecked(OTHER);
 		List<String> productsFromUI = homePage.getAllProducts();
@@ -58,6 +62,7 @@ public class HomePageValidation extends BaseTest {
 	
 	@Test(priority = 5, dataProvider = "getElectronicsProductData")
 	public void TestProducts_Electronics(List<String> input) throws InterruptedException {
+		SoftAssert softAssert = new SoftAssert();
 		homePage.implicitWait();
 		homePage.selectCategoryToBeChecked(ELECTRONICS);
 		List<String> productsFromUI = homePage.getAllProducts();
